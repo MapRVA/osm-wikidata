@@ -100,11 +100,12 @@ daylight-buildings: data/sources/daylight-latest.osm.pbf
 	osmium renumber data/sources/daylight-buildings.osm.pbf -o data/sources/planet-latest.osm.pbf
 	rm data/sources/daylight-buildings.osm.pbf data/sources/daylight-latest.osm.pbf
  
-planet: data/sources/planet-latest.osm.pbf
+planet: #data/sources/planet-latest.osm.pbf
 	java -Xmx24g \
   	-jar target/*-with-deps.jar \
   	--download --bounds=planet \
-  	--osm-path=data/sources/planet-latest.osm.pbf \
+	--area=planet \
+  	--osm-path=/home/dschep/wikidata.osm.pbf \
 		--output=planet.pmtiles \
 		--nodemap-type=sparsearray --nodemap-storage=mmap 2>&1 | tee logs.txt
 

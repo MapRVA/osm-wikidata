@@ -17,9 +17,11 @@ import javax.annotation.concurrent.Immutable;
 public final class QrankDb {
 
   private final LongLongHashMap db;
+  public final long max;
 
-  public QrankDb(LongLongHashMap db) {
+  public QrankDb(LongLongHashMap db, long max) {
     this.db = db;
+    this.max = max;
   }
 
   public long get(long wikidataId) {
@@ -43,15 +45,19 @@ public final class QrankDb {
     try (BufferedReader br = new BufferedReader(new InputStreamReader(gzip))) {
       String content;
       LongLongHashMap db = new LongLongHashMap();
+      long max = 0;
       String header = br.readLine(); // header
       assert (header.equals("Entity,QRank"));
       while ((content = br.readLine()) != null) {
         var split = content.split(",");
         long id = Long.parseLong(split[0].substring(1));
         long rank = Long.parseLong(split[1]);
+        if (rank > max) {
+          max = rank;
+        }
         db.put(id, rank);
       }
-      return new QrankDb(db);
+      return new QrankDb(db, max);
     }
   }
 }
