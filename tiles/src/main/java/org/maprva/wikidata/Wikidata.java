@@ -10,9 +10,9 @@ import java.nio.file.Path;
 import org.locationtech.jts.geom.Envelope;
 
 
-public class Basemap extends ForwardingProfile {
+public class Wikidata extends ForwardingProfile {
 
-  public Basemap(QrankDb qrankDb) {
+  public Wikidata(QrankDb qrankDb) {
     var poi = new Pois(qrankDb);
     registerHandler(poi);
     registerSourceHandler("osm", poi);
@@ -20,12 +20,12 @@ public class Basemap extends ForwardingProfile {
 
   @Override
   public String name() {
-    return "Basemap";
+    return "Wikidata";
   }
 
   @Override
   public String description() {
-    return "Basemap layers derived from OpenStreetMap and Natural Earth";
+    return "Wikidata layers derived from OpenStreetMap and Wikidata";
   }
 
   @Override
@@ -60,7 +60,7 @@ public class Basemap extends ForwardingProfile {
 
     var qrankDb = QrankDb.fromCsv(sourcesDir.resolve("qrank.csv.gz"));
 
-    planetiler.setProfile(new Basemap(qrankDb)).setOutput(Path.of(area + ".pmtiles"))
+    planetiler.setProfile(new Wikidata(qrankDb)).setOutput(Path.of(area + ".pmtiles"))
       .run();
   }
 }

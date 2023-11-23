@@ -11,7 +11,7 @@
     <maven.compiler.target>21</maven.compiler.target>
     <planetiler.version>0.7-SNAPSHOT</planetiler.version>
     <junit.version>5.10.0</junit.version>
-    <mainClass>org.maprva.wikidata.Basemap</mainClass>
+    <mainClass>org.maprva.wikidata.Wikidata</mainClass>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.organization>maprva</sonar.organization>
     <sonar.projectKey>maprva_wikidata</sonar.projectKey>
@@ -22,7 +22,7 @@
   <artifactId>wikidata</artifactId>
   <version>HEAD</version>
 
-  <name>Protomaps Basemap</name>
+  <name>OSM Wikidata</name>
 
   <repositories>
     <!-- Planetiler depends on geotools for shapefile processing, which is not in maven central. Add here: -->
