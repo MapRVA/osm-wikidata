@@ -1,4 +1,4 @@
-package com.protomaps.basemap.layers;
+package org.maprva.wikidata.layers;
 
 import static com.onthegomap.planetiler.util.Parse.parseDoubleOrNull;
 
@@ -10,11 +10,9 @@ import com.onthegomap.planetiler.geo.GeoUtils;
 import com.onthegomap.planetiler.geo.GeometryException;
 import com.onthegomap.planetiler.reader.SourceFeature;
 import com.onthegomap.planetiler.util.ZoomFunction;
-import com.protomaps.basemap.feature.FeatureId;
-import com.protomaps.basemap.feature.QrankDb;
-import com.protomaps.basemap.names.OsmNames;
+import org.maprva.wikidata.feature.FeatureId;
+import org.maprva.wikidata.feature.QrankDb;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Pois implements ForwardingProfile.FeatureProcessor, ForwardingProfile.FeaturePostProcessor {
 
@@ -32,13 +30,6 @@ public class Pois implements ForwardingProfile.FeatureProcessor, ForwardingProfi
   private static final double WORLD_AREA_FOR_70K_SQUARE_METERS =
     Math.pow(GeoUtils.metersToPixelAtEquator(0, Math.sqrt(70_000)) / 256d, 2);
   private static final double LOG2 = Math.log(2);
-
-  /*
-   * Assign every toilet a monotonically increasing ID so that we can limit output at low zoom levels to only the
-   * highest ID toilet nodes. Be sure to use thread-safe data structures any time a profile holds state since multiple
-   * threads invoke processFeature concurrently.
-   */
-  private final AtomicInteger poiNumber = new AtomicInteger(0);
 
   @Override
   public void processFeature(SourceFeature sf, FeatureCollector features) {

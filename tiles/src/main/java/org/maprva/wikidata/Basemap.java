@@ -1,23 +1,11 @@
-package com.protomaps.basemap;
+package org.maprva.wikidata;
 
 import com.onthegomap.planetiler.ForwardingProfile;
 import com.onthegomap.planetiler.Planetiler;
 import com.onthegomap.planetiler.config.Arguments;
 import com.onthegomap.planetiler.util.Downloader;
-import com.protomaps.basemap.feature.NaturalEarthDb;
-import com.protomaps.basemap.feature.QrankDb;
-import com.protomaps.basemap.layers.Boundaries;
-import com.protomaps.basemap.layers.Buildings;
-import com.protomaps.basemap.layers.Earth;
-import com.protomaps.basemap.layers.Landuse;
-import com.protomaps.basemap.layers.Natural;
-import com.protomaps.basemap.layers.PhysicalLine;
-import com.protomaps.basemap.layers.PhysicalPoint;
-import com.protomaps.basemap.layers.Places;
-import com.protomaps.basemap.layers.Pois;
-import com.protomaps.basemap.layers.Roads;
-import com.protomaps.basemap.layers.Transit;
-import com.protomaps.basemap.layers.Water;
+import org.maprva.wikidata.feature.QrankDb;
+import org.maprva.wikidata.layers.Pois;
 import java.nio.file.Path;
 import org.locationtech.jts.geom.Envelope;
 

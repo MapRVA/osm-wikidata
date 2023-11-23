@@ -1,4 +1,4 @@
-package com.protomaps.basemap.feature;
+package org.maprva.wikidata.feature;
 
 import com.carrotsearch.hppc.LongLongHashMap;
 import java.io.*;
@@ -8,7 +8,7 @@ import javax.annotation.concurrent.Immutable;
 
 /**
  * An in-memory representation of the entire QRank database used for generalizing
- * {@link com.protomaps.basemap.layers.Pois}.
+ * {@link org.maprva.wikidata.layers.Pois}.
  * <p>
  * Parses a copy of the gzipped QRank dataset into a long->long hash map that can be efficiently queried when processing
  * POI features.

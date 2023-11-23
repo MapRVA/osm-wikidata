@@ -1,4 +1,4 @@
-package com.protomaps.basemap.feature;
+package org.maprva.wikidata.feature;
 
 import com.onthegomap.planetiler.reader.SourceFeature;
 import com.onthegomap.planetiler.reader.osm.OsmElement;
