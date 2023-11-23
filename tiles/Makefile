@@ -21,7 +21,7 @@ lint:
 # https://github.com/protomaps/go-pmtiles
 # Example tile coord to test with: http://localhost:8080/monaco/12/2133/1495.mvt
 serve:
-	~/Downloads/pmtiles serve --cors=* .
+	pmtiles serve . --cors=* --public-hostname=http://localhost:8080
 
 #
 # Testing areas
@@ -48,9 +48,20 @@ switzerland:
 washington:
 	java -jar target/*-with-deps.jar --download --force --area=washington
 
-# Download and generate kansas.pmtiles in the current directory (with USA label):
-kansas:
-	java -jar target/*-with-deps.jar --download --force --area=kansas
+# Download and generate virinia.pmtiles in the current directory
+virginia:
+	java -jar target/*-with-deps.jar --download --force --area=us/virginia --output=virginia.pmtiles
+# Download and generate richmond.pmtiles in the current directory
+richmond:
+	java -jar target/*-with-deps.jar --download --force --area=us/virginia --output=richmond.pmtiles --bounds=-77.72071838378906,37.33068883892999,-77.22099442966284,37.70772645289051 --osm-earth-water-bounds=-77.72071838378906,37.33068883892999,-77.22099442966284,37.70772645289051
+data/belleisle-latest.osm.pbf:
+	curl -L -o data/virginia-latest.osm.pbf https://download.geofabrik.de/north-america/us/virginia-latest.osm.pbf
+	osmium extract -o data/belleisle-latest.osm.pbf --bbox=-77.46115656453186,37.52354946383914,-77.44542097672822,37.53402469920596 data/virginia-latest.osm.pbf
+belleisle: data/belleisle-latest.osm.pbf
+	java -jar target/*-with-deps.jar \
+  	--osm-path=data/belleisle-latest.osm.pbf \
+		--download --force --area=us/virginia --output=richmond.pmtiles \
+		--bounds=-77.46115656453186,37.52354946383914,-77.44542097672822,37.53402469920596 --osm-earth-water-bounds=-77.46115656453186,37.52354946383914,-77.44542097672822,37.53402469920596
 
 # Large
 #
@@ -119,4 +130,4 @@ planet-xl: data/sources/planet-latest.osm.pbf
 		--output=planet.pmtiles \
 		--nodemap-type=array --storage=ram 2>&1 | tee logs.txt
 
-.PHONY: clean clean-fast clean-pmtiles lint serve monaco sf switzerland washington california ny ny-metro japan us-lowzoom eu-lowzoom planet planet-xl
+.PHONY: clean clean-fast clean-pmtiles lint serve monaco sf switzerland washington california ny ny-metro japan us-lowzoom eu-lowzoom planet planet-xl richmond virginia
